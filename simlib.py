@@ -122,7 +122,7 @@ def simulate(scenario, vehicle, depart_time=0.0):
 
         # 1) Acceleration block
         if v_prev < v_max:
-            t1 = t_acc(v_prev, v_max)
+            t1 = t_acc(v_prev, v_max) * scenario.pad_factor  # Apply pad factor to time
             d1 = d_acc(v_prev, v_max)
             actions.append({
                 'Phase': 'Accelerate',
@@ -144,7 +144,7 @@ def simulate(scenario, vehicle, depart_time=0.0):
         d3 = d_dec(v_max, v_next)
         d2 = segment_length - (pos_cum - segment_start_pos) - d3
         if d2 > 0:
-            t2 = d2 / v_max
+            t2 = (d2 / v_max) * scenario.pad_factor  # Apply pad factor to time
             if cruising:
                 actions.append({
                     'Phase': 'Cruise',
@@ -164,7 +164,7 @@ def simulate(scenario, vehicle, depart_time=0.0):
 
         # 3) Deceleration block
         if v_next < v_max:
-            t3 = t_dec(v_max, v_next)
+            t3 = t_dec(v_max, v_next) * scenario.pad_factor  # Apply pad factor to time
             d3 = d_dec(v_max, v_next)
             actions.append({
                 'Phase': 'Decelerate',
