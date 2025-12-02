@@ -20,7 +20,7 @@ route = [
                                 # 51-53rd Street-Hyde Park stop
     (6.1, 7.1, 160, True),
                                 # 55-56-57th Street stop
-    (7.1, 8.7, 160, True),)                            
+    (7.1, 8.7, 160, True),                            
                                 # 59-60th St-U Chicago top
     (8.7, 9.5, 160, True),
                                 # 63rd Street stop
