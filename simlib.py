@@ -72,7 +72,7 @@ def simulate(scenario, vehicle, depart_time=0.0):
     # Helper to convert speeds:
     kmh2ms = lambda v: v * 1000/3600
     ms2kmh = lambda v: v * 3600/1000
-    mile2m = 1609.34
+    km2m = 1000
 
     vehicle_max_speed_ms = kmh2ms(vehicle.max_speed)
 
@@ -106,7 +106,7 @@ def simulate(scenario, vehicle, depart_time=0.0):
 
     for start, end, spd, stop in route:
         segment_start_pos = pos_cum
-        segment_length = (end - start) * mile2m
+        segment_length = (end - start) * km2m
         v_lim   = limited_kmh2ms(spd)
         cruising = True
         # determine next speed for decel
@@ -128,8 +128,8 @@ def simulate(scenario, vehicle, depart_time=0.0):
                 'Phase': 'Accelerate',
                 'Start Pos (m)': segment_start_pos,
                 'End Pos (m)'  : segment_start_pos + d1,
-                'Start Pos (mi)': segment_start_pos / mile2m,
-                'End Pos (mi)'  : (segment_start_pos + d1) / mile2m,
+                'Start Pos (km)': segment_start_pos / km2m,
+                'End Pos (km)'  : (segment_start_pos + d1) / km2m,
                 'Start Speed (km/h)': ms2kmh(v_prev),
                 'End Speed (km/h)': ms2kmh(v_max),
                 'Start Time': timestamp_to_str(t_cum),
@@ -150,8 +150,8 @@ def simulate(scenario, vehicle, depart_time=0.0):
                     'Phase': 'Cruise',
                     'Start Pos (m)': pos_cum,
                     'End Pos (m)'  : pos_cum + d2,
-                    'Start Pos (mi)': pos_cum / mile2m,
-                    'End Pos (mi)'  : (pos_cum + d2) / mile2m,
+                    'Start Pos (km)': pos_cum / km2m,
+                    'End Pos (km)'  : (pos_cum + d2) / km2m,
                     'Start Speed (km/h)': ms2kmh(v_max),
                     'End Speed (km/h)': ms2kmh(v_max),
                     'Start Time': timestamp_to_str(t_cum),
@@ -170,8 +170,8 @@ def simulate(scenario, vehicle, depart_time=0.0):
                 'Phase': 'Decelerate',
                 'Start Pos (m)': pos_cum,
                 'End Pos (m)'  : pos_cum + d3,
-                'Start Pos (mi)': pos_cum / mile2m,
-                'End Pos (mi)'  : (pos_cum + d3) / mile2m,
+                'Start Pos (km)': pos_cum / km2m,
+                'End Pos (km)'  : (pos_cum + d3) / km2m,
                 'Start Speed (km/h)': ms2kmh(v_max),
                 'End Speed (km/h)': ms2kmh(v_next),
                 'Start Time': timestamp_to_str(t_cum),
@@ -188,8 +188,8 @@ def simulate(scenario, vehicle, depart_time=0.0):
                 'Phase': 'Dwell',
                 'Start Pos (m)': pos_cum,
                 'End Pos (m)'  : pos_cum,
-                'Start Pos (mi)': pos_cum / mile2m,
-                'End Pos (mi)'  : pos_cum / mile2m,
+                'Start Pos (km)': pos_cum / km2m,
+                'End Pos (km)'  : pos_cum / km2m,
                 'Start Speed (km/h)': 0.0,
                 'End Speed (km/h)': 0.0,
                 'Start Time': timestamp_to_str(t_cum),
@@ -213,7 +213,7 @@ def simulate(scenario, vehicle, depart_time=0.0):
 
     actions_df = pd.DataFrame(actions)
     print("\n=== Action Breakdown ===")
-    print(actions_df[['Phase','Start Pos (m)','End Pos (m)','Start Pos (mi)','End Pos (mi)','Start Speed (km/h)', 'End Speed (km/h)', 'Start Time','End Time']].to_string(index=False))
+    print(actions_df[['Phase','Start Pos (m)','End Pos (m)','Start Pos (km)','End Pos (km)','Start Speed (km/h)', 'End Speed (km/h)', 'Start Time','End Time']].to_string(index=False))
 
     timetable_df = pd.DataFrame(timetable)
     print("\n=== Timetable ===")
@@ -229,9 +229,9 @@ def plot_stringline(actions_df, timetable_df, color='tab:blue', linewidth=1):
       - cruise/dwell as straight lines
     """
     # map station names → vertical positions (m)
-    mile2m = 1609.34
+    km2m = 1000
     station_positions = {
-        row['Station']: row['MP'] * mile2m
+        row['Station']: row['MP'] * km2m
         for _, row in timetable_df.iterrows() if row['MP'] is not None
     }
     
@@ -293,16 +293,16 @@ def plot_stringline_multi(
     """
     Plot multiple scenarios on a single stringline (time-distance) diagram.
 
-    Each timetable_df should have 'Station' and 'MP' (milepost) rows for y-axis labels.
+    Each timetable_df should have 'Station' and 'MP' (milepost in km) rows for y-axis labels.
     """
 
     # Collect station y-axis ticks from all scenarios (union of stations)
-    mile2m = 1609.34
+    km2m = 1000
     station_pos = {}
     for _actions_df, ttab, _label, _color in scenarios:
         for _, r in ttab.iterrows():
             if 'MP' in r and r['MP'] is not None and r['MP'] == r['MP']:
-                station_pos[r['Station']] = float(r['MP']) * mile2m
+                station_pos[r['Station']] = float(r['MP']) * km2m
 
     # Stable order (by position increasing)
     station_items = sorted(station_pos.items(), key=lambda kv: kv[1])
