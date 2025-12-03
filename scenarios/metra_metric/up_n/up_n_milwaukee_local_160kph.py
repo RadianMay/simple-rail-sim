@@ -7,6 +7,7 @@ scenario_name = "UP-N, high-level boarding, 160kph"
 # Speed limits are from OpenRailwayMap
 
 route = [
+    (0.0, 120.8, 160, True),     # from Chicago Union Station Resolve
                                 # SOUTH MILWAUKEE stop
     (120.8, 123.3, 160, True),
                                 # COLLEGE stop
@@ -25,6 +26,7 @@ route = [
 ]
 
 stops = {
+    0.0: 'Chicago Union Station',
     120.8: 'South Milwaukee',
     123.3: 'College',
     126.4: 'Cudahy',
