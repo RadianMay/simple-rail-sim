@@ -24,15 +24,21 @@ route = [
                                 # HIGHLAND PARK stop
     (37.5, 46.1, 160, True),
                                 # LAKE FOREST stop
-    (46.1, 58.3, 160, True),
+    (46.1, 55.9, 160, False),
+    (55.9, 56.4, 100, False),
+    (56.4, 58.3, 160, True),
                                 # WAUKEGAN stop
     (58.3, 68.3, 160, True),
                                 # ZION stop
     (68.3, 72.1, 160, True),
                                 # WINTHROP HARBOR stop
-    (72.1, 83.6, 160, True),
+    (72.1, 81.9, 160, False),
+    (81.9, 82.5, 150, False),
+    (82.5, 83.6, 160, True),
                                 # KENOSHA stop
-    (83.6, 89.6, 160, True),
+    (83.6, 86.2, 160, True),
+    (86.2, 87.7, 144, False),
+    (87.7, 89.6, 160, True),
                                 # SOMERS stop
     (89.6, 96.3, 160, True),
                                 # DURAND stop

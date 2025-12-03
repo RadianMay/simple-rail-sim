@@ -58,7 +58,9 @@ route = [
                                 # GREAT LAKES stop
     (52.3, 54.8, 160, True),
                                 # NORTH CHICAGO stop
-    (54.8, 58.3, 160, True),
+    (54.8, 55.9, 160, False),
+    (55.9, 56.4, 100, False),
+    (56.4, 58.3, 160, True),
                                 # WAUKEGAN stop
 
 ]
