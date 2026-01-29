@@ -1,6 +1,6 @@
-scenario_name = "UP-N + KRM, high-level boarding, 160kph"
+scenario_name = "UP-N Express through running, local from Waukegen to South Milwaukee, 160kph"
 
-# Each tuple: (start milepost, end milepost, speed limit (km/h), ends at stop, name)
+# Each tuple: (start kilometer, end kilometer, speed limit (km/h), ends at stop, name)
 
 # Mileposts are from https://chicagorailfan.com/mmupn.html and https://chicagorailfan.com/rfttucn.html
 # Stations north of Kenosha are from satellite imagery
@@ -36,7 +36,7 @@ route = [
     (81.9, 82.5, 150, False),
     (82.5, 83.6, 160, True),
                                 # KENOSHA stop
-    (83.6, 86.2, 160, True),
+    (83.6, 86.2, 160, False),
     (86.2, 87.7, 144, False),
     (87.7, 89.6, 160, True),
                                 # SOMERS stop

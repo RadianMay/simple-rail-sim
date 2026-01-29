@@ -1,6 +1,6 @@
-scenario_name = "UP-N, high-level boarding, 160kph"
+scenario_name = "UP-N local Union to Waukegen through running, 160kph"
 
-# Each tuple: (start milepost, end milepost, speed limit (km/h), ends at stop, name)
+# Each tuple: (start kilometer, end kilometer, speed limit (km/h), ends at stop, name)
 
 # Mileposts are from https://chicagorailfan.com/mmupn.html and https://chicagorailfan.com/rfttucn.html
 # Stations north of Kenosha are from satellite imagery

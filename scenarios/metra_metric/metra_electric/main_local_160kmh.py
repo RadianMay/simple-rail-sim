@@ -3,7 +3,7 @@ scenario_name = "Metra Electric - Main Line Through Running, local (160km/h)"
 # This scenario sets the max speed to 160kph and uses mile markers in km. The start is set to McCormick Place.
 
 
-# Each tuple: (start milepost, end milepost, speed limit (km/h), ends at stop, name)
+# Each tuple: (start kilometer, end kilometer, speed limit (km/h), ends at stop, name)
 
 # Mileposts are from https://chicagorailfan.com/mmelec.html
 # Assume 100mph/160kph speed limit
